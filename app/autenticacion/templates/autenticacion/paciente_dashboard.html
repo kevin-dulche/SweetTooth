@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Paciente</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1a2a64;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 30px;
+        }
+
+        .menu-button {
+            width: 200px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: linear-gradient(to bottom, #ffffff, #cccccc);
+            border: none;
+            border-radius: 8px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .menu-button:hover {
+            background: linear-gradient(to bottom, #cccccc, #999999);
+        }
+
+        .main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #3f65b8;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content {
+            padding: 30px;
+            flex-grow: 1;
+            background-color: #f2f2f2;
+        }
+
+        .content h1 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+        {% comment %} <button class="menu-button" onclick="window.location.href='mis_citas.html'">Mis Citas</button>
+        <button class="menu-button" onclick="window.location.href='mis_notas.html'">Notas Médicas</button>
+        <button class="menu-button" onclick="window.location.href='agendar_cita.html'">Agendar Nueva Cita</button>
+        <button class="menu-button" onclick="window.location.href='pagos.html'">Realizar Pago</button> {% endcomment %}
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button class="menu-button" type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <span>Paciente: {{ request.user.username }}</span>
+            <span>{{ current_time }}</span>
+        </div>
+
+        <div class="content">
+            <h1>Bienvenido Paciente</h1>
+            <p>Utilice el menú para gestionar su información.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
