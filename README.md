@@ -20,12 +20,10 @@
 
 ### Detener la ejecución de los contenedores
 
-Para terminar la ejecución del programa, ejecutar el siguiente comando: `docker-compose stop`
+Para terminar la ejecución del programa, ejecutar el siguiente comando: `docker-compose down -v`
 
 Ejecutar nuevamente `docker ps` para asegurarse que ya termino la ejecución de ambos contenedores.
 
-Cuando quieras volver a levantar los contenedores usar: `docker-compose start`
-
-### Nota: Cada que modifiques algo y lo quieras probar debes hacer `docker-compose up -d --build`
+Cuando quieras volver a levantar los contenedores usar: `docker-compose up -d --build`
 
 #### Por el momento se encuentra en modo de pruebas
