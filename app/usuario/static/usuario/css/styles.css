@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.login-bg {
+    background-color: #1e73be;
+    color: white;
+}
+
+.login-box {
+    width: 300px;
+    margin: 100px auto;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid white;
+    background: none;
+    color: white;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background: linear-gradient(to bottom, white, #ccc);
+    color: black;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #0b3c71;
+    color: white;
+    padding: 20px;
+    width: 200px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.main {
+    flex-grow: 1;
+    background: #f5f5f5;
+}
+
+.header {
+    background-color: #1e73be;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content {
+    padding: 20px;
+}
+
+.tabs button {
+    margin-right: 10px;
+}

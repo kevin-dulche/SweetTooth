@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Usuario</title>
+    <link rel="stylesheet" href="{% static 'usuario/css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #1a2a64;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .main {
+            flex-grow: 1;
+        }
+
+        .header {
+            background-color: #3f65b8;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #ffffff, #cccccc);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+    </div>
+
+    <div class="main">
+        <div class="header">Agregar Usuario</div>
+
+        <div class="content">
+            <div class="form-section">
+                <h3>Registrar Nuevo Usuario</h3>
+                <form method="POST" action="{% url 'agregar_usuario' %}">
+                    {% csrf_token %}
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+
+                    <label for="tipo_usuario">Tipo de Usuario:</label>
+                    <select id="tipo_usuario" name="tipo_usuario" required>
+                        <option>Administrador</option>
+                        <option>Especialista</option>
+                        <option>Recepcionista</option>
+                        <option>Paciente</option>
+                    </select>
+
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+
+                    <div class="button-group">
+                        <button type="submit">Registrar</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

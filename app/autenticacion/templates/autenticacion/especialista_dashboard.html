@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -78,7 +80,8 @@
     <div class="sidebar">
         <h2>Sweet Tooth</h2>
         {% comment %} <button onclick="window.location.href='citas.html'">Citas</button>
-        <button onclick="window.location.href='notas_pacientes.html'">Notas Médicas</button> {% endcomment %}
+        {% endcomment %}
+        <button class="menu-button" onclick="window.location.href='{% url 'notas_pacientes' %}'">Notas Médicas</button>
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button class="menu-button" type="submit">Cerrar Sesión</button>

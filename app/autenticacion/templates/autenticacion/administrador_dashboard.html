@@ -1,9 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Panel Administrador</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'autenticacion/css/styles.css' %}">
     <style>
         body {
             margin: 0;
@@ -77,9 +79,11 @@
 <div class="container">
     <div class="sidebar">
         <h2>Sweet Tooth</h2>
-        {% comment %} <button onclick="window.location.href='gestion_usuarios.html'">Gestión de Usuarios</button>
+        <button class="menu-button" onclick="window.location.href='{% url 'gestion_usuarios' %}'">Gestión de Usuarios</button>
+        <button class="menu-button" onclick="window.location.href='{% url 'notas_pacientes' %}'">Notas de Pacientes</button>
+        {% comment %} 
         <button onclick="window.location.href='citas.html'">Citas</button>
-        <button onclick="window.location.href='notas_pacientes.html'">Notas de Pacientes</button> {% endcomment %}
+        {% endcomment %}
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button class="menu-button" type="submit">Cerrar Sesión</button>

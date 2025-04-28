@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Notas de Pacientes</title>
+    <link rel="stylesheet" href="{% static 'usuario/css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #1a2a64;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .main {
+            flex-grow: 1;
+        }
+
+        .header {
+            background-color: #3f65b8;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #ffffff, #cccccc);
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sweet Tooth</h2>
+        </div>
+    
+        <div class="main">
+            <div class="header">Notas de Pacientes</div>
+    
+            <div class="content">
+                <div class="form-section">
+                    <h3>Ver y Editar Notas</h3>
+                    <form method="POST" action="{% url 'notas_pacientes' %}">
+                        {% csrf_token %}
+    
+                        <label for="paciente_seleccionado">Seleccionar Paciente:</label>
+                        <select id="paciente_seleccionado" name="paciente_seleccionado" required>
+                            {% for paciente in pacientes %}
+                                <option value="{{ paciente.id }}"
+                                    {% if paciente.id == paciente_seleccionado_id %} selected {% endif %}
+                                >
+                                    {{ paciente.username }}
+                                </option>
+                            {% endfor %}
+                        </select>
+    
+                        <label for="nota_paciente">Nota Médica:</label>
+                        <textarea id="nota_paciente" name="nota_paciente" placeholder="Aquí se muestra o edita la nota médica..." required>
+                            {{ nota_actual }}
+                        </textarea>
+                        
+    
+                        <div class="button-group">
+                            <button type="submit">Guardar Cambios</button>
+                            <button type="reset">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </body>
+    
+</html>

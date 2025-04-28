@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -78,16 +80,17 @@
 <div class="container">
     <div class="sidebar">
         <h2>Sweet Tooth</h2>
-        {% comment %} <button class="menu-button" onclick="window.location.href='mis_citas.html'">Mis Citas</button>
-        <button class="menu-button" onclick="window.location.href='mis_notas.html'">Notas Médicas</button>
-        <button class="menu-button" onclick="window.location.href='agendar_cita.html'">Agendar Nueva Cita</button>
-        <button class="menu-button" onclick="window.location.href='pagos.html'">Realizar Pago</button> {% endcomment %}
+        <button class="menu-button" onclick="window.location.href='{% url 'mis_notas' %}'">Mis Notas</button>
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button class="menu-button" type="submit">Cerrar Sesión</button>
         </form>
     </div>
-
+    {% comment %} 
+    <button class="menu-button" onclick="window.location.href='mis_citas.html'">Mis Citas</button>
+    <button class="menu-button" onclick="window.location.href='agendar_cita.html'">Agendar Nueva Cita</button>
+    <button class="menu-button" onclick="window.location.href='pagos.html'">Realizar Pago</button> {% endcomment %}
+    
     <div class="main">
         <div class="header">
             <span>Paciente: {{ request.user.username }}</span>
