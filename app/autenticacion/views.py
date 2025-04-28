@@ -2,6 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import timezone
+from django.contrib.auth import logout
 # Create your views here.
 
 # autenticacion/views.py
@@ -62,3 +63,7 @@ def especialista_dashboard(request):
         return render(request, 'autenticacion/login.html', {'form': form, 'error_message': 'No tienes permiso para acceder a esta página. Solo los especialistas pueden verlo.'})
     current_time = timezone.now().strftime("%d/%m/%Y - %I:%M %p")  # Formato: 25/04/2025 - 11:15 p.m.
     return render(request, 'autenticacion/especialista_dashboard.html', {'current_time': current_time})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
