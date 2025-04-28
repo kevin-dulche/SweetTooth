@@ -16,6 +16,8 @@ def custom_login(request):
             # Redirigir según el tipo de usuario
             if user.user_type == 'recepcionista':
                 return redirect('recepcionista_dashboard')  # Vista para recepcionista
+            elif user.user_type == 'administrador':
+                return redirect('administrador_dashboard')
             elif user.user_type == 'paciente':
                 return redirect('paciente_dashboard')  # Vista para paciente
             elif user.user_type == 'especialista':
@@ -42,6 +44,9 @@ def is_paciente(user):
 def is_especialista(user):
     return user.user_type == 'especialista'
 
+def is_administrador(user):
+    return user.user_type == 'administrador'
+
 def recepcionista_dashboard(request):
     if not is_recepcionista(request.user):
         form = AuthenticationForm()
@@ -63,6 +68,13 @@ def especialista_dashboard(request):
         return render(request, 'autenticacion/login.html', {'form': form, 'error_message': 'No tienes permiso para acceder a esta página. Solo los especialistas pueden verlo.'})
     current_time = timezone.now().strftime("%d/%m/%Y - %I:%M %p")  # Formato: 25/04/2025 - 11:15 p.m.
     return render(request, 'autenticacion/especialista_dashboard.html', {'current_time': current_time})
+
+def administrador_dashboard(request):
+    if not is_administrador(request.user):
+        form = AuthenticationForm()
+        return render(request, 'autenticacion/login.html', {'form': form, 'error_message': 'No tienes permiso para acceder a esta página. Solo los administradores pueden verlo.'})
+    current_time = timezone.now().strftime("%d/%m/%Y - %I:%M %p")  # Formato: 25/04/2025 - 11:15 p.m.
+    return render(request, 'autenticacion/administrador_dashboard.html', {'current_time': current_time})
 
 def logout_view(request):
     logout(request)

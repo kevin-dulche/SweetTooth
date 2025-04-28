@@ -6,17 +6,19 @@ class CustomUser(AbstractUser):
     RECEPCIONISTA = 'recepcionista'
     PACIENTE = 'paciente'
     ESPECIALISTA = 'especialista'
+    ADMINISTRADOR = 'administrador'
 
     USER_TYPE_CHOICES = [
         (RECEPCIONISTA, 'Recepcionista'),
         (PACIENTE, 'Paciente'),
         (ESPECIALISTA, 'Especialista'),
+        (ADMINISTRADOR, 'Administrador'),
     ]
 
     user_type = models.CharField(
         max_length=20,
         choices=USER_TYPE_CHOICES,
-        default=PACIENTE,
+        default=ADMINISTRADOR,
     )
 
     # Hacer que el correo electrónico no sea obligatorio
@@ -24,4 +26,3 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
-
