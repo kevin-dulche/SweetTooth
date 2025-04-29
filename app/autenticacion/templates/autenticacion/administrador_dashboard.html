@@ -81,8 +81,8 @@
         <h2>Sweet Tooth</h2>
         <button class="menu-button" onclick="window.location.href='{% url 'gestion_usuarios' %}'">Gestión de Usuarios</button>
         <button class="menu-button" onclick="window.location.href='{% url 'notas_pacientes' %}'">Notas de Pacientes</button>
+        <button class="menu-button" onclick="window.location.href='{% url 'gestor_citas' %}'">Citas</button>
         {% comment %} 
-        <button onclick="window.location.href='citas.html'">Citas</button>
         {% endcomment %}
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}

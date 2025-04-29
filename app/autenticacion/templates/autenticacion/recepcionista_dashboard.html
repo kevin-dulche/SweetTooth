@@ -88,7 +88,8 @@
         <div class="content">
             <div class="button-group">
                 {% comment %} 
-                <button onclick="window.location.href='pagos.html'">Pagos</button> {% endcomment %}
+                {% endcomment %}
+                <button onclick="window.location.href='{% url 'menu_pagos' %}'">Pagos</button> 
                 <button onclick="window.location.href='{% url 'gestor_citas' %}'">Citas</button>
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
