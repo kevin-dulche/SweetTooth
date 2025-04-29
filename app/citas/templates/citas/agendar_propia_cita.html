@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Cita</title>
+    <link rel="stylesheet" href="{% static 'citas/css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #1a2a64;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .main {
+            flex-grow: 1;
+        }
+
+        .header {
+            background-color: #3f65b8;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #ffffff, #cccccc);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+    </div>
+    <div class="main">
+        <div class="header">Agendar Cita</div>
+    
+        <div class="content">
+            <div class="form-section">
+                <h3>Registrar Nueva Cita</h3>
+                <form method="POST" action="{% url 'agendar_propia_cita' %}">
+                    {% csrf_token %}
+    
+                    <label for="paciente">Paciente:</label>
+                    <ul>
+                        <li>Nombre: {{ request.user.username }}</li>
+                    </ul>
+    
+                    <label for="especialista">Nombre del Especialista:</label>
+                    <select id="especialista" name="especialista" required>
+                        {% for especialista in especialistas %}
+                            <option value="{{ especialista.id }}">{{ especialista.username }}</option>
+                        {% endfor %}
+                    </select>
+    
+                    <label for="fecha">Fecha de la Cita:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+    
+                    <label for="hora">Hora de la Cita:</label>
+                    <input type="time" id="hora" name="hora" required>
+    
+                    <label for="tipo_cita">Tipo de Cita:</label>
+                    <select id="tipo_cita" name="tipo_cita" required>
+                        <option value="valoracion">Valoración</option>
+                        <option value="urgencia">Urgencia</option>
+                        <option value="tratamiento">Tratamiento</option>
+                        <option value="seguimiento">Seguimiento</option>
+                    </select>
+    
+                    <label for="motivo">Motivo de la Cita:</label>
+                    <textarea id="motivo" name="motivo" placeholder="Describe el motivo..." required></textarea>
+    
+                    <div class="button-group">
+                        <button type="submit">Agendar</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>    
+
+
+
+</body>
+</html>

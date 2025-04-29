@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Cita</title>
+    <link rel="stylesheet" href="{% static 'citas/css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #1a2a64;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .main {
+            flex-grow: 1;
+        }
+
+        .header {
+            background-color: #3f65b8;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #ffffff, #cccccc);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button-group button.eliminar {
+            background: linear-gradient(to bottom, #ff4d4d, #cc0000);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+    </div>
+
+    <div class="main">
+        <div class="header">Eliminar Cita</div>
+    
+        <div class="content">
+            <div class="form-section">
+                <h3>Seleccionar Cita a Eliminar</h3>
+                <form method="POST" action="{% url 'eliminar_cita' %}">
+                    {% csrf_token %}
+                    
+                    <label for="cita_eliminar">Seleccionar Cita:</label>
+                    <select id="cita_eliminar" name="cita_id" required>
+                        {% for cita in citas %}
+                            <option value="{{ cita.id }}">
+                                {{ cita.paciente.username }} - {{ cita.fecha }} {{ cita.hora }}
+                            </option>
+                        {% endfor %}
+                    </select>
+    
+                    <div class="button-group">
+                        <button type="submit" class="eliminar">Eliminar Cita</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+</body>
+</html>
