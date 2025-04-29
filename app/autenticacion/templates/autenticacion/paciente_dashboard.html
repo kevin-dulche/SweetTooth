@@ -81,14 +81,14 @@
     <div class="sidebar">
         <h2>Sweet Tooth</h2>
         <button class="menu-button" onclick="window.location.href='{% url 'mis_notas' %}'">Mis Notas</button>
+        <button class="menu-button" onclick="window.location.href='{% url 'mis_citas' %}'">Mis Citas</button>
+        <button class="menu-button" onclick="window.location.href='{% url 'agendar_propia_cita' %}'">Agendar Nueva Cita</button>
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button class="menu-button" type="submit">Cerrar Sesión</button>
         </form>
     </div>
     {% comment %} 
-    <button class="menu-button" onclick="window.location.href='mis_citas.html'">Mis Citas</button>
-    <button class="menu-button" onclick="window.location.href='agendar_cita.html'">Agendar Nueva Cita</button>
     <button class="menu-button" onclick="window.location.href='pagos.html'">Realizar Pago</button> {% endcomment %}
     
     <div class="main">

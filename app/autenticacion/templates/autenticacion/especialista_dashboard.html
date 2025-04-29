@@ -79,8 +79,9 @@
 <div class="container">
     <div class="sidebar">
         <h2>Sweet Tooth</h2>
-        {% comment %} <button onclick="window.location.href='citas.html'">Citas</button>
+        {% comment %} 
         {% endcomment %}
+        <button class="menu-button" onclick="window.location.href='{% url 'gestor_citas' %}'">Citas</button>
         <button class="menu-button" onclick="window.location.href='{% url 'notas_pacientes' %}'">Notas Médicas</button>
         <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}

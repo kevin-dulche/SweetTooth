@@ -4,8 +4,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel Secretaria</title>
-    <link rel="stylesheet" href="{% static 'autenticacion/css/styles.css' %}">
+    <title>Gestión de Citas</title>
+    <link rel="stylesheet" href="{% static 'citas/css/styles.css' %}">
     <style>
         body {
             margin: 0;
@@ -42,13 +42,10 @@
 
         .content {
             padding: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100% - 60px);
         }
 
         .button-group {
+            margin-top: 50px;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -56,15 +53,15 @@
         }
 
         .button-group button {
-            width: 220px;
+            width: 200px;
             padding: 15px;
-            font-size: 16px;
-            font-weight: bold;
             border: none;
             border-radius: 8px;
             background: linear-gradient(to bottom, #ffffff, #cccccc);
             color: #000;
+            font-size: 16px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .button-group button:hover {
@@ -80,20 +77,13 @@
     </div>
 
     <div class="main">
-        <div class="header">
-            <span>Recepcionista: {{ request.user.username }}</span>
-            <span>{{ current_time }}</span>
-        </div>
+        <div class="header">Gestión de Citas</div>
 
         <div class="content">
             <div class="button-group">
-                {% comment %} 
-                <button onclick="window.location.href='pagos.html'">Pagos</button> {% endcomment %}
-                <button onclick="window.location.href='{% url 'gestor_citas' %}'">Citas</button>
-                <form action="{% url 'logout' %}" method="POST">
-                    {% csrf_token %}
-                    <button class="menu-button" type="submit">Cerrar Sesión</button>
-                </form>
+                <button onclick="window.location.href='{% url 'agendar_cita' %}'">Agendar Cita</button>
+                <button onclick="window.location.href='{% url 'modificar_cita' %}'">Modificar Cita</button>
+                <button onclick="window.location.href='{% url 'eliminar_cita' %}'">Eliminar Cita</button>
             </div>
         </div>
     </div>

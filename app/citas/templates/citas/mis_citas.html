@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Citas</title>
+    <link rel="stylesheet" href="{% static 'citas/css/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #1a2a64;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .main {
+            flex-grow: 1;
+        }
+
+        .header {
+            background-color: #3f65b8;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #e6e6e6;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+    </div>
+
+    <div class="main">
+        <div class="header">Mis Citas</div>
+
+        <div class="content">
+            <div class="form-section">
+                <h3>Citas Agendadas</h3>
+                <ul>
+                    {% for cita in citas %}
+                        <li>{{ cita }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
