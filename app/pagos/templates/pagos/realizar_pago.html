@@ -1,0 +1,204 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Realizar Pago</title>
+    <link rel="stylesheet" href="{% static 'autenticacion/css/styles.css' %}">
+    <style>
+        body { margin: 0; background-color: #f2f2f2; font-family: sans-serif; }
+        .container { display: flex; height: 100vh; }
+        .sidebar { width: 200px; background-color: #1a2a64; color: white; padding: 20px; }
+        .sidebar h2 { margin-top: 0; }
+        .main { flex-grow: 1; }
+        .header { background-color: #3f65b8; color: white; padding: 10px 20px; font-weight: bold; }
+        .content { padding: 30px; }
+        .form-section { background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 5px #ccc; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
+        .button-group { margin-top: 20px; display: flex; justify-content: space-between; }
+        .button-group button { padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to bottom, #ffffff, #cccccc); color: #000; font-weight: bold; cursor: pointer; }
+        .readonly { background-color: #e9ecef; }
+        .hidden { display: none; }
+        .error { color: red; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+    </div>
+
+    <div class="main">
+        <div class="header">Realizar Pago</div>
+        <div class="content">
+            <div class="form-section">
+                <h3>Realizar un Pago Pendiente</h3>
+                <!-- Formulario principal para la información de pago -->
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Seleccionar pago pendiente -->
+                    <label>Pagos pendientes:</label>
+                    <select name="pago_select" id="pago-select" required>
+                        <option value="">-- Seleccione un pago --</option>
+                        {% for p in pagos_pendientes %}
+                        <option value="{{ p.id_pago }}"
+                                data-id_pago="{{ p.id_pago }}"
+                                data-id_servicio="{{ p.id_servicio }}"
+                                data-id_paciente="{{ p.id_paciente }}"
+                                data-nombre_paciente="{{ p.nombre_paciente }}"
+                                data-tipo_tratamiento="{{ p.tipo_tratamiento }}"
+                                data-descripcion_tratamiento="{{ p.descripcion_tratamiento }}"
+                                data-especialista_responsable="{{ p.especialista_responsable }}"
+                                data-fecha_pago="{{ p.fecha_pago }}"
+                                data-monto_pago="{{ p.monto_pago }}">
+                            ID: {{ p.id_pago }} - {{ p.nombre_paciente }} - ${{ p.monto_pago }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+                    <hr>
+
+                    <!-- Mostrar información del pago (read-only) -->
+                    <label for="id_pago">ID Pago:</label>
+                    <input type="text" name="id_pago" id="id_pago" value="{{ form.id_pago.value }}" readonly>
+
+                    <label for="id_servicio">ID Servicio:</label>
+                    <input type="text" name="id_servicio" id="id_servicio" value="{{ form.id_servicio.value }}" readonly>
+
+                    <label for="id_paciente">ID Paciente:</label>
+                    <input type="text" name="id_paciente" id="id_paciente" value="{{ form.id_paciente.value }}" readonly>
+
+                    <label for="nombre_paciente">Nombre del Paciente:</label>
+                    <input type="text" name="nombre_paciente" id="nombre_paciente" value="{{ form.nombre_paciente.value }}" readonly>
+
+                    <label for="tipo_tratamiento">Tipo de Tratamiento:</label>
+                    <input type="text" name="tipo_tratamiento" id="tipo_tratamiento" value="{{ form.tipo_tratamiento.value }}" readonly>
+
+                    <label for="descripcion_tratamiento">Descripción del Tratamiento:</label>
+                    <textarea name="descripcion_tratamiento" id="descripcion_tratamiento" readonly>{{ form.descripcion_tratamiento.value }}</textarea>
+
+                    <label for="especialista_responsable">Especialista Responsable:</label>
+                    <input type="text" name="especialista_responsable" id="especialista_responsable" value="{{ form.especialista_responsable.value }}" readonly>
+
+                    <label for="fecha_pago">Fecha de Pago:</label>
+                    <input type="date" name="fecha_pago" id="fecha_pago" value="{{ form.fecha_pago.value }}" readonly>
+
+                    <label for="monto_pago">Monto de Pago:</label>
+                    <input type="text" name="monto_pago" id="monto_pago" value="{{ form.monto_pago.value }}" readonly>
+
+                    <hr>
+
+                    <!-- Selección del método de pago -->
+                    <label for="metodo_pago">Método de pago:</label>
+                    <select name="metodo_pago" id="metodo_pago" required>
+                        <option value="">-- Seleccione un método de pago --</option>
+                        <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+
+                    <!-- Campos específicos según el método de pago -->
+                    <div id="tarjeta-datos" class="hidden">
+                        <label for="tipo_tarjeta">Tipo de Tarjeta:</label>
+                        <select name="tipo_tarjeta" id="tipo_tarjeta">
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">MasterCard</option>
+                            <option value="amex">American Express</option>
+                            <option value="discover">Discover</option>
+                        </select>
+
+                        <label for="numero_tarjeta">Número de tarjeta:</label>
+                        <input type="text" name="numero_tarjeta" id="numero_tarjeta" placeholder="Número de tarjeta">
+                        <div id="error-tarjeta" class="error hidden">Número de tarjeta no válido</div>
+
+                        <label for="fecha_expiracion">Fecha de expiración:</label>
+                        <input type="month" name="fecha_expiracion" id="fecha_expiracion">
+                        <div id="error-expiracion" class="error hidden">Fecha de expiración no válida</div>
+
+                        <label for="cvv">CVV:</label>
+                        <input type="text" name="cvv" id="cvv" placeholder="CVV">
+                        <div id="error-cvv" class="error hidden">CVV no válido</div>
+                    </div>
+
+                    <div id="paypal-datos" class="hidden">
+                        <label for="correo_paypal">Correo de PayPal:</label>
+                        <input type="email" name="correo_paypal" id="correo_paypal" placeholder="Correo de PayPal">
+                        <div id="error-paypal" class="error hidden">Correo de PayPal no válido</div>
+                    </div>
+
+                    <!-- Botones de Confirmar y Limpiar del pago -->
+                    <div class="button-group">
+                        <button type="submit" id="btn-confirmar" disabled>Confirmar Pago</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+
+                <!-- Botón de Regresar -->
+                <div class="button-group">
+                    <button onclick="window.history.back();">Regresar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pagoSelect = document.getElementById('pago-select');
+        const metodoPagoSelect = document.getElementById('metodo_pago');
+        const tarjetaDatos = document.getElementById('tarjeta-datos');
+        const paypalDatos = document.getElementById('paypal-datos');
+        const btnConfirmar = document.getElementById('btn-confirmar');
+
+        // Función para actualizar los campos read-only del pago
+        function actualizarCamposPago() {
+            const selectedOption = pagoSelect.options[pagoSelect.selectedIndex];
+            document.getElementById('id_pago').value = selectedOption.getAttribute('data-id_pago') || '';
+            document.getElementById('id_servicio').value = selectedOption.getAttribute('data-id_servicio') || '';
+            document.getElementById('id_paciente').value = selectedOption.getAttribute('data-id_paciente') || '';
+            document.getElementById('nombre_paciente').value = selectedOption.getAttribute('data-nombre_paciente') || '';
+            document.getElementById('tipo_tratamiento').value = selectedOption.getAttribute('data-tipo_tratamiento') || '';
+            document.getElementById('descripcion_tratamiento').value = selectedOption.getAttribute('data-descripcion_tratamiento') || '';
+            document.getElementById('especialista_responsable').value = selectedOption.getAttribute('data-especialista_responsable') || '';
+            document.getElementById('fecha_pago').value = selectedOption.getAttribute('data-fecha_pago') || '';
+            document.getElementById('monto_pago').value = selectedOption.getAttribute('data-monto_pago') || '';
+        }
+
+        // Verificar y habilitar/deshabilitar el botón de Confirmar Pago según los datos
+        function verificarHabilitacion() {
+            const pagoValido = document.getElementById('id_pago').value;
+            const metodoValido = metodoPagoSelect.value;
+            if (pagoValido && metodoValido) {
+                btnConfirmar.disabled = false;
+            } else {
+                btnConfirmar.disabled = true;
+            }
+        }
+
+        // Eventos para actualizar campos y verificar habilitación
+        pagoSelect.addEventListener('change', function() {
+            actualizarCamposPago();
+            verificarHabilitacion();
+        });
+
+        metodoPagoSelect.addEventListener('change', function() {
+            // Mostrar/ocultar campos según el método de pago seleccionado
+            if (metodoPagoSelect.value === 'tarjeta') {
+                tarjetaDatos.classList.remove('hidden');
+                paypalDatos.classList.add('hidden');
+            } else if (metodoPagoSelect.value === 'paypal') {
+                tarjetaDatos.classList.add('hidden');
+                paypalDatos.classList.remove('hidden');
+            } else {
+                tarjetaDatos.classList.add('hidden');
+                paypalDatos.classList.add('hidden');
+            }
+            verificarHabilitacion();
+        });
+    });
+</script>
+
+</body>
+</html>

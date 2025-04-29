@@ -6,6 +6,7 @@ services:
             python app/manage.py makemigrations &&
             python app/manage.py migrate &&
             python app/createusers.py &&
+            python app/create_pagos.py &&
             python app/manage.py runserver 0.0.0.0:8000"
 
     volumes:
