@@ -1,0 +1,75 @@
+from a_pago_servicio import *
+from i_pago_con_tarjeta import *
+from i_pago_con_paypal import *
+from i_pago_con_transferencia import *
+
+def realizar_pagos():
+    tarjeta_pago = IPagoConTarjeta()
+    transferencia_pago = IPagoConTransferencia()
+    paypal_pago = IPagoConPayPal()
+
+    pago_con_tarjeta = APago_Servicio(tarjeta_pago)
+    pago_con_transferencia = APago_Servicio(transferencia_pago)
+    pago_con_paypal = APago_Servicio(paypal_pago)
+
+    pago_con_tarjeta.procesar_pago()
+    pago_con_transferencia.procesar_pago()
+    pago_con_paypal.procesar_pago()
+
+    print("========== PAGO CON TARJETA ==========")
+    print(f"ID Pago: {pago_con_tarjeta.get_id_pago()}")
+    print(f"ID Servicio: {pago_con_tarjeta.get_id_servicio()}")
+    print(f"ID Paciente: {pago_con_tarjeta.get_id_paciente()}")
+    print(f"Nombre del paciente: {pago_con_tarjeta.get_nombre_paciente()}")
+    print(f"Tipo de tratamiento: {pago_con_tarjeta.get_tipo_de_tratamiento()}")
+    print(f"Descripción del tratamiento: {pago_con_tarjeta.get_descripcion_tratamiento()}")
+    print(f"Especialista responsable: {pago_con_tarjeta.get_especialista_responsable()}")
+    print(f"Fecha de pago: {pago_con_tarjeta.get_fecha_pago()}")
+    print(f"Monto pagado: ${pago_con_tarjeta.get_monto_pago():,.2f}")
+    print(f"Método de pago: {pago_con_tarjeta.get_metodo_pago()}")
+    print(f"Estado del pago: {pago_con_tarjeta.get_estado_pago()}")
+    print("Detalles del método:")
+    detalles = pago_con_tarjeta.get_detalles_del_metodo_pago()
+    print(f"  • Últimos 4 dígitos: {detalles.get('ultimos_4_digitos')}")
+    print(f"  • Titular: {detalles.get('nombre_titular')}")
+    print("=======================================")
+
+
+    print("\n========== PAGO CON TRANSFERENCIA ==========")
+    print(f"ID Pago: {pago_con_transferencia.get_id_pago()}")
+    print(f"ID Servicio: {pago_con_transferencia.get_id_servicio()}")
+    print(f"ID Paciente: {pago_con_transferencia.get_id_paciente()}")
+    print(f"Nombre del paciente: {pago_con_transferencia.get_nombre_paciente()}")
+    print(f"Tipo de tratamiento: {pago_con_transferencia.get_tipo_de_tratamiento()}")
+    print(f"Descripción del tratamiento: {pago_con_transferencia.get_descripcion_tratamiento()}")
+    print(f"Especialista responsable: {pago_con_transferencia.get_especialista_responsable()}")
+    print(f"Fecha de pago: {pago_con_transferencia.get_fecha_pago()}")
+    print(f"Monto pagado: ${pago_con_transferencia.get_monto_pago():,.2f}")
+    print(f"Método de pago: {pago_con_transferencia.get_metodo_pago()}")
+    print(f"Estado del pago: {pago_con_transferencia.get_estado_pago()}")
+    print("Detalles del método:")
+    detalles = pago_con_transferencia.get_detalles_del_metodo_pago()
+    print(f"  • Banco emisor: {detalles.get('banco_emisor')}")
+    print(f"  • Nº Referencia: {detalles.get('numero_referencia')}")
+    print("=======================================")
+
+    print("\n========== PAGO CON PAYPAL ==========")
+    print(f"ID Pago: {pago_con_paypal.get_id_pago()}")
+    print(f"ID Servicio: {pago_con_paypal.get_id_servicio()}")
+    print(f"ID Paciente: {pago_con_paypal.get_id_paciente()}")
+    print(f"Nombre del paciente: {pago_con_paypal.get_nombre_paciente()}")
+    print(f"Tipo de tratamiento: {pago_con_paypal.get_tipo_de_tratamiento()}")
+    print(f"Descripción del tratamiento: {pago_con_paypal.get_descripcion_tratamiento()}")
+    print(f"Especialista responsable: {pago_con_paypal.get_especialista_responsable()}")
+    print(f"Fecha de pago: {pago_con_paypal.get_fecha_pago()}")
+    print(f"Monto pagado: ${pago_con_paypal.get_monto_pago():,.2f}")
+    print(f"Método de pago: {pago_con_paypal.get_metodo_pago()}")
+    print(f"Estado del pago: {pago_con_paypal.get_estado_pago()}")
+    print("Detalles del método:")
+    detalles = pago_con_paypal.get_detalles_del_metodo_pago()
+    print(f"  • Email: {detalles.get('email_paypal')}")
+    print(f"  • Plataforma: {detalles.get('plataforma')}")
+    print("=======================================")
+    
+# Llamada a la función para realizar los pagos y mostrar los resultados
+realizar_pagos()

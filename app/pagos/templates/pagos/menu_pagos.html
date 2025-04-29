@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú de Pagos</title>
+    <link rel="stylesheet" href="{% static 'autenticacion/css/styles.css' %}">
+    <style>
+        body { margin: 0; background-color: #f2f2f2; font-family: sans-serif; }
+        .container { display: flex; height: 100vh; }
+        .sidebar { width: 200px; background-color: #1a2a64; color: white; padding: 20px; }
+        .sidebar h2 { margin-top: 0; }
+        .main { flex-grow: 1; }
+        .header { background-color: #3f65b8; color: white; padding: 10px 20px; font-weight: bold; }
+        .content { padding: 30px; display: flex; flex-direction: column; align-items: center; }
+        .menu-section { background-color: #ffffff; padding: 40px; border-radius: 10px; box-shadow: 0 0 5px #ccc; text-align: center; }
+        .menu-section h3 { margin-bottom: 30px; }
+        .menu-buttons { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .menu-buttons a { text-decoration: none; }
+        .menu-buttons button { 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 10px; 
+            background: linear-gradient(to bottom, #ffffff, #cccccc); 
+            color: #000; 
+            font-weight: bold; 
+            font-size: 16px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .menu-buttons button:hover {
+            background: linear-gradient(to bottom, #cccccc, #aaaaaa);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Sweet Tooth</h2>
+    </div>
+
+    <div class="main">
+        <div class="header">Menú de Pagos</div>
+
+        <div class="content">
+            <div class="menu-section">
+                <h3>Seleccione una opción</h3>
+                <div class="menu-buttons">
+                    <a href="{% url 'realizar_pago' %}"><button>Realizar Pago</button></a>
+                    <a href="{% url 'consulta_pagos' %}"><button>Consultar Historial de Pagos</button></a>
+
+
+                </div>
+                <!-- Botón de Regresar -->
+                <div class="button-group">
+                    <button onclick="window.history.back();">Regresar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
