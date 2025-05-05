@@ -1,5 +1,5 @@
 from .builders import PacienteBuilder, EspecialistaBuilder, RecepcionistaBuilder, AdministradorBuilder
-from .gestor_usuario import GestorUsuario
+from usuario.gestor_usuario import GestorUsuario
 from autenticacion.models import CustomUser
 
 class ControladorUsuarios:

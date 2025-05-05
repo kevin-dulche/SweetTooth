@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'autenticacion',
     'usuario',
     'pagos',
-    'citas'
+    'citas',
+    'servicios'
 ]
 
 MIDDLEWARE = [

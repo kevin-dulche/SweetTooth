@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-from .decorators import CitaBasica, InfoPacienteDecorator, InfoMotivoDecorator
+from citas.decorator.CitaBasica import CitaBasica
+from citas.decorator.InfoPacienteDecorator import InfoPacienteDecorator
+from citas.decorator.InfoMotivoDecorator import InfoMotivoDecorator
 from .models import Cita
 
 @login_required
@@ -11,7 +13,7 @@ def mis_citas(request):
 
     citas_decoradas = []
     for cita in citas:
-        cita_base = CitaBasica(cita)
+        cita_base = CitaBasica(cita)    
         cita_con_paciente = InfoPacienteDecorator(cita_base)
         cita_con_motivo = InfoMotivoDecorator(cita_con_paciente)
 
@@ -62,7 +64,7 @@ def modificar_cita(request):
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cita
-from .factories import obtener_fabrica  # <-- Tu función para obtener la fábrica
+from servicios.abstractFactory.factories import obtener_fabrica # <-- Tu función para obtener la fábrica
 from django.contrib.auth.decorators import login_required
 from autenticacion.models import CustomUser
 
@@ -115,7 +117,7 @@ def eliminar_cita(request):
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .factories import obtener_fabrica
+from servicios.abstractFactory.factories import obtener_fabrica
 from autenticacion.models import CustomUser
 from django.contrib import messages
 
