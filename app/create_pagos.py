@@ -254,3 +254,67 @@ pago16 = Pago(
 )
 pago16.save()  # Guardar el pago
 print(f"⚡ Creando pago para {pago16.nombre_paciente}")
+
+# Medicamento para Juan Pérez
+pago17 = Pago(
+    id_servicio=1,
+    id_paciente=1,
+    nombre_paciente='Juan Pérez',
+    tipo_tratamiento='Medicamento',
+    descripcion_tratamiento='Ibuprofeno 400mg - Caja de 10 tabletas',
+    especialista_responsable='Dr. López',
+    fecha_pago=date(2025, 5, 25),
+    monto_pago=Decimal('150.00'),
+    metodo_pago='Efectivo',
+    estado_pago='pendiente',
+)
+pago17.save()
+print(f"💊 Creando pago de medicamento para {pago17.nombre_paciente}")
+
+# Medicamento para Ana Martínez
+pago18 = Pago(
+    id_servicio=2,
+    id_paciente=2,
+    nombre_paciente='Ana Martínez',
+    tipo_tratamiento='Medicamento',
+    descripcion_tratamiento='Amoxicilina 500mg - Tratamiento de 10 días',
+    especialista_responsable='Dra. Martínez',
+    fecha_pago=date(2025, 5, 26),
+    monto_pago=Decimal('250.00'),
+    metodo_pago='Transferencia',
+    estado_pago='pendiente',
+)
+pago18.save()
+print(f"💊 Creando pago de medicamento para {pago18.nombre_paciente}")
+
+# Medicamento para Carlos Ruiz
+pago19 = Pago(
+    id_servicio=3,
+    id_paciente=3,
+    nombre_paciente='Carlos Ruiz',
+    tipo_tratamiento='Medicamento',
+    descripcion_tratamiento='Enalapril 10mg - Control de presión arterial',
+    especialista_responsable='Dr. García',
+    fecha_pago=date(2025, 6, 12),
+    monto_pago=Decimal('180.00'),
+    metodo_pago='Tarjeta',
+    estado_pago='pendiente',
+)
+pago19.save()
+print(f"💊 Creando pago de medicamento para {pago19.nombre_paciente}")
+
+# Medicamento para Sofía González
+pago20 = Pago(
+    id_servicio=4,
+    id_paciente=4,
+    nombre_paciente='Sofía González',
+    tipo_tratamiento='Medicamento',
+    descripcion_tratamiento='Lágrimas artificiales - Gotas oculares',
+    especialista_responsable='Dr. López',
+    fecha_pago=date(2025, 5, 22),
+    monto_pago=Decimal('120.00'),
+    metodo_pago='Efectivo',
+    estado_pago='pendiente',
+)
+pago20.save()
+print(f"💊 Creando pago de medicamento para {pago20.nombre_paciente}")
