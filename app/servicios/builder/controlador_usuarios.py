@@ -1,4 +1,7 @@
-from .builders import PacienteBuilder, EspecialistaBuilder, RecepcionistaBuilder, AdministradorBuilder
+from .PacienteBuilder import PacienteBuilder
+from .EspecialistaBuilder import EspecialistaBuilder
+from .RecepcionistaBuilder import RecepcionistaBuilder
+from .AdministradorBuilder import AdministradorBuilder
 from usuario.gestor_usuario import GestorUsuario
 from autenticacion.models import CustomUser
 

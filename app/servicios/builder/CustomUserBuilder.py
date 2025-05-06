@@ -21,20 +21,3 @@ class CustomUserBuilder:
 
     def get_result(self):
         return self._user
-
-# Builders especializados
-class PacienteBuilder(CustomUserBuilder):
-    def set_user_type(self):
-        return CustomUser.PACIENTE
-
-class EspecialistaBuilder(CustomUserBuilder):
-    def set_user_type(self):
-        return CustomUser.ESPECIALISTA
-
-class RecepcionistaBuilder(CustomUserBuilder):
-    def set_user_type(self):
-        return CustomUser.RECEPCIONISTA
-
-class AdministradorBuilder(CustomUserBuilder):
-    def set_user_type(self):
-        return CustomUser.ADMINISTRADOR
